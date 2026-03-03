@@ -11,7 +11,8 @@ import {
 } from "@mui/material";
 import { CameraAlt as CameraAltIcon } from "@mui/icons-material";
 import { VisuallyHiddenInput } from "../components/styles/StyledComponents";
-import { useInputValidation } from "6pp";
+import { useFileHandler, useInputValidation, useStrongPassword } from "6pp";
+import { usernameValidator } from "../utils/validators";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -21,8 +22,10 @@ const Login = () => {
 
   const name = useInputValidation("");
   const bio = useInputValidation("");
-  const username = useInputValidation("");
+  const username = useInputValidation("", usernameValidator);
+  // const password = useStrongPassword();
   const password = useInputValidation("");
+  const avatar = useFileHandler("single");
 
   return (
     <Container
@@ -107,6 +110,7 @@ const Login = () => {
               <Stack position="relative" width={"10rem"} margin="auto">
                 <Avatar
                   sx={{ width: "10rem", height: "10rem", objectFit: "contain" }}
+                  src={avatar.preview}
                 />
                 <IconButton
                   sx={{
@@ -120,7 +124,10 @@ const Login = () => {
                 >
                   <>
                     <CameraAltIcon />
-                    <VisuallyHiddenInput type="file" />
+                    <VisuallyHiddenInput
+                      type="file"
+                      onChange={avatar.changeHandler}
+                    />
                   </>
                 </IconButton>
               </Stack>
@@ -151,6 +158,11 @@ const Login = () => {
                 value={username.value}
                 onChange={username.changeHandler}
               />
+              {username.error && (
+                <Typography variant="caption" color="error">
+                  {username.error}
+                </Typography>
+              )}
               <TextField
                 required
                 fullWidth
@@ -159,8 +171,15 @@ const Login = () => {
                 margin="normal"
                 variant="outlined"
                 value={password.value}
-                onChange={password.changeHandler}
+                onChange={(e) => {
+                  password.changeHandler(e);
+                }}
               />
+              {/* {password.error && (
+                <Typography variant="caption" color="error">
+                  {password.error}
+                </Typography>
+              )} */}
               <Button
                 sx={{ marginTop: "1rem" }}
                 variant="contained"
