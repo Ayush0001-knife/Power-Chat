@@ -27,185 +27,212 @@ const Login = () => {
   const password = useInputValidation("");
   const avatar = useFileHandler("single");
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+  };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+  };
+
   return (
-    <Container
-      component={"main"}
-      maxWidth="xs"
-      sx={{
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+    <div
+      style={{
+        backgroundImage:
+          "linear-gradient(rgba(200,200,200,0.5),rgba(120,110,220,0.5))",
       }}
     >
-      <Paper
-        elevation={3}
+      <Container
+        component={"main"}
+        maxWidth="xs"
         sx={{
-          padding: 4,
+          height: "100vh",
           display: "flex",
-          flexDirection: "column",
+          justifyContent: "center",
           alignItems: "center",
         }}
       >
-        {isLogin ? (
-          <>
-            <Typography variant="h5">Login</Typography>
-            <form
-              style={{
-                width: "100%",
-                marginTop: "1rem",
-              }}
-            >
-              <TextField
-                required
-                fullWidth
-                label="Username"
-                margin="normal"
-                variant="outlined"
-                value={username.value}
-                onChange={username.changeHandler}
-              />
-              <TextField
-                required
-                fullWidth
-                label="Password"
-                type="password"
-                margin="normal"
-                variant="outlined"
-                value={password.value}
-                onChange={password.changeHandler}
-              />
-              <Button
-                sx={{ marginTop: "1rem" }}
-                variant="contained"
-                color="primary"
-                type="submit"
-                fullWidth
-              >
-                Login
-              </Button>
-              <Typography
-                variant="body2"
-                align="center"
-                color="blue"
-                sx={{
+        <Paper
+          elevation={3}
+          sx={{
+            padding: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          {isLogin ? (
+            <>
+              <Typography variant="h5">Login</Typography>
+              <form
+                style={{
+                  width: "100%",
                   marginTop: "1rem",
-                  cursor: "pointer",
                 }}
-                onClick={toggleLogin}
+                onSubmit={handleLogin}
               >
-                Don't have an account? Register
-              </Typography>
-            </form>
-          </>
-        ) : (
-          <>
-            <Typography variant="h5">Register</Typography>
-            <form
-              style={{
-                width: "100%",
-                marginTop: "1rem",
-              }}
-            >
-              <Stack position="relative" width={"10rem"} margin="auto">
-                <Avatar
-                  sx={{ width: "10rem", height: "10rem", objectFit: "contain" }}
-                  src={avatar.preview}
+                <TextField
+                  required
+                  fullWidth
+                  label="Username"
+                  margin="normal"
+                  variant="outlined"
+                  value={username.value}
+                  onChange={username.changeHandler}
                 />
-                <IconButton
-                  sx={{
-                    position: "absolute",
-                    bottom: 0,
-                    right: 0,
-                    bgcolor: "white",
-                    "&:hover": { bgcolor: "rgba(242, 242, 242, 0.7)" },
-                  }}
-                  component="label"
+                <TextField
+                  required
+                  fullWidth
+                  label="Password"
+                  type="password"
+                  margin="normal"
+                  variant="outlined"
+                  value={password.value}
+                  onChange={password.changeHandler}
+                />
+                <Button
+                  sx={{ marginTop: "1rem" }}
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  fullWidth
                 >
-                  <>
-                    <CameraAltIcon />
-                    <VisuallyHiddenInput
-                      type="file"
-                      onChange={avatar.changeHandler}
-                    />
-                  </>
-                </IconButton>
-              </Stack>
-              <TextField
-                required
-                fullWidth
-                label="Name"
-                margin="normal"
-                variant="outlined"
-                value={name.value}
-                onChange={name.changeHandler}
-              />
-              <TextField
-                required
-                fullWidth
-                label="Bio"
-                margin="normal"
-                variant="outlined"
-                value={bio.value}
-                onChange={bio.changeHandler}
-              />
-              <TextField
-                required
-                fullWidth
-                label="Username"
-                margin="normal"
-                variant="outlined"
-                value={username.value}
-                onChange={username.changeHandler}
-              />
-              {username.error && (
-                <Typography variant="caption" color="error">
-                  {username.error}
+                  Login
+                </Button>
+                <Typography
+                  variant="body2"
+                  align="center"
+                  color="blue"
+                  sx={{
+                    marginTop: "1rem",
+                    cursor: "pointer",
+                  }}
+                  onClick={toggleLogin}
+                >
+                  Don't have an account? Register
                 </Typography>
-              )}
-              <TextField
-                required
-                fullWidth
-                label="Password"
-                type="password"
-                margin="normal"
-                variant="outlined"
-                value={password.value}
-                onChange={(e) => {
-                  password.changeHandler(e);
+              </form>
+            </>
+          ) : (
+            <>
+              <Typography variant="h5">Register</Typography>
+              <form
+                style={{
+                  width: "100%",
+                  marginTop: "1rem",
                 }}
-              />
-              {/* {password.error && (
+                onSubmit={handleRegister}
+              >
+                <Stack position="relative" width={"10rem"} margin="auto">
+                  <Avatar
+                    sx={{
+                      width: "10rem",
+                      height: "10rem",
+                      objectFit: "contain",
+                    }}
+                    src={avatar.preview}
+                  />
+
+                  <IconButton
+                    sx={{
+                      position: "absolute",
+                      bottom: 0,
+                      right: 0,
+                      bgcolor: "white",
+                      "&:hover": { bgcolor: "rgba(242, 242, 242, 0.7)" },
+                    }}
+                    component="label"
+                  >
+                    <>
+                      <CameraAltIcon />
+                      <VisuallyHiddenInput
+                        type="file"
+                        onChange={avatar.changeHandler}
+                      />
+                    </>
+                  </IconButton>
+                </Stack>
+                {avatar.error && (
+                  <Typography margin={"1rem"} variant="caption" color="error">
+                    {avatar.error}
+                  </Typography>
+                )}
+                <TextField
+                  required
+                  fullWidth
+                  label="Name"
+                  margin="normal"
+                  variant="outlined"
+                  value={name.value}
+                  onChange={name.changeHandler}
+                />
+                <TextField
+                  required
+                  fullWidth
+                  label="Bio"
+                  margin="normal"
+                  variant="outlined"
+                  value={bio.value}
+                  onChange={bio.changeHandler}
+                />
+                <TextField
+                  required
+                  fullWidth
+                  label="Username"
+                  margin="normal"
+                  variant="outlined"
+                  value={username.value}
+                  onChange={username.changeHandler}
+                />
+                {username.error && (
+                  <Typography variant="caption" color="error">
+                    {username.error}
+                  </Typography>
+                )}
+                <TextField
+                  required
+                  fullWidth
+                  label="Password"
+                  type="password"
+                  margin="normal"
+                  variant="outlined"
+                  value={password.value}
+                  onChange={(e) => {
+                    password.changeHandler(e);
+                  }}
+                />
+                {/* {password.error && (
                 <Typography variant="caption" color="error">
                   {password.error}
                 </Typography>
               )} */}
-              <Button
-                sx={{ marginTop: "1rem" }}
-                variant="contained"
-                color="primary"
-                type="submit"
-                fullWidth
-              >
-                Register
-              </Button>
-              <Typography
-                variant="body2"
-                align="center"
-                color="blue"
-                sx={{
-                  marginTop: "1rem",
-                  cursor: "pointer",
-                }}
-                onClick={toggleLogin}
-              >
-                Already have an account? Login
-              </Typography>
-            </form>
-          </>
-        )}
-      </Paper>
-    </Container>
+                <Button
+                  sx={{ marginTop: "1rem" }}
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  fullWidth
+                >
+                  Register
+                </Button>
+                <Typography
+                  variant="body2"
+                  align="center"
+                  color="blue"
+                  sx={{
+                    marginTop: "1rem",
+                    cursor: "pointer",
+                  }}
+                  onClick={toggleLogin}
+                >
+                  Already have an account? Login
+                </Typography>
+              </form>
+            </>
+          )}
+        </Paper>
+      </Container>
+    </div>
   );
 };
 
