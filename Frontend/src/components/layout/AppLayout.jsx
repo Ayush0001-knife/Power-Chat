@@ -3,9 +3,15 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Title from "../shared/Title";
 import Grid from "@mui/material/Grid";
+import Chatlist from "../specific/Chatlist";
+import { sampleChats } from "../../constants/sampleData";
+import { useParams } from "react-router-dom";
 
 const AppLayout = () => (WrappedComponent) => {
   return function Layout(props) {
+    const params = useParams();
+    const chatId = params.chatId;
+
     return (
       <>
         <Title title="My-Chat" subscription="Welcome to my app!" />
@@ -20,7 +26,7 @@ const AppLayout = () => (WrappedComponent) => {
               height: "100%",
             }}
           >
-            First
+            <Chatlist chats={sampleChats} chatId={chatId} />
           </Grid>
 
           {/* Chat Area */}
