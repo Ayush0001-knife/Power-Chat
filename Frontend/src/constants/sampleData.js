@@ -12,7 +12,10 @@ groupChat:false,
 members:["1","3"]
 },
 {
-avatar:["https://www.w3schools.com/howto/img_avatar.png"],
+avatar:["https://www.w3schools.com/howto/img_avatar.png","https://www.w3schools.com/howto/img_avatar.png",
+       "https://www.w3schools.com/howto/img_avatar.png",
+       "https://www.w3schools.com/howto/img_avatar.png",
+],
 name:"Tech Team",
 _id:"3",
 groupChat:true,

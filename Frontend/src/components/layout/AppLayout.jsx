@@ -6,11 +6,17 @@ import Grid from "@mui/material/Grid";
 import Chatlist from "../specific/Chatlist";
 import { sampleChats } from "../../constants/sampleData";
 import { useParams } from "react-router-dom";
+import Profile from "../specific/Profile";
 
 const AppLayout = () => (WrappedComponent) => {
   return function Layout(props) {
     const params = useParams();
     const chatId = params.chatId;
+
+    const handleDeleteChat = (e, _id, groupChat) => {
+      e.preventDefault();
+      console.log("Delete Chat", _id, groupChat);
+    };
 
     return (
       <>
@@ -26,7 +32,11 @@ const AppLayout = () => (WrappedComponent) => {
               height: "100%",
             }}
           >
-            <Chatlist chats={sampleChats} chatId={chatId} />
+            <Chatlist
+              chats={sampleChats}
+              chatId={chatId}
+              handleDeleteChat={handleDeleteChat}
+            />
           </Grid>
 
           {/* Chat Area */}
@@ -49,7 +59,7 @@ const AppLayout = () => (WrappedComponent) => {
               bgcolor: "rgba(0,0,0,0.85)",
             }}
           >
-            Third
+            <Profile />
           </Grid>
         </Grid>
 
